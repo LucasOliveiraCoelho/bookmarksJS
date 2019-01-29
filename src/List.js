@@ -2,18 +2,20 @@ import React from 'react';
 import './List.css';
 
 function List(props){
-  const content = props.bookmarks.map((bookmarks) =>
-    <div key={bookmarks.id}>
+  const bookmarksList = props.bookmarks.map((bookmarks) =>
+    <div className='singleBookmarks' key={bookmarks.id}>
       <h3>{bookmarks.title}</h3>
-      <p>{bookmarks.link}</p>
+      <p>
+        <a href={bookmarks.link} target="_blank" rel="noopener noreferrer">{bookmarks.link}</a>
+      </p>
       <ul className='Tags'>
-        <li>{bookmarks.tags}</li>
+        <li>{bookmarks.tags} <span className='remove-icon' onClick={() => (console.log('Excluir'))}></span></li>
       </ul>
     </div>
   );
   return (
-    <div>
-      {content}
+    <div className='Bookmarks'>
+      {bookmarksList}
     </div>
   );
 }

@@ -5,9 +5,9 @@ import List from './List'
 import './ContentBody.css'
   
   const bookmarksArg = [
-    {title: 'Teste 1', link: 'www.teste.com.br', tags: 'teste,teste2,teste3'},
-    {title: 'Teste 2', link: 'www.teste.com.br', tags: 'teste,teste2,teste3'},
-    {title: 'Teste 3', link: 'www.teste.com.br', tags: 'teste,teste2,teste3'}
+    {id: 1,title: 'Teste 1', link: 'http://www.teste.com.br', tags: 'teste'},
+    {id: 2,title: 'Teste 2', link: 'http://www.teste.com.br', tags: 'teste2'},
+    {id: 3,title: 'Teste 3', link: 'http://www.teste.com.br', tags: 'teste3'}
   ];
 
 class ContentBody extends Component {
