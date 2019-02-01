@@ -3,29 +3,59 @@ import { Row, Col, Container } from 'reactstrap'
 import Menu from './Menu'
 import List from './List'
 import './ContentBody.css'
-  
-  const bookmarksArg = [
-    {id: 1,title: 'Teste 1', link: 'http://www.teste.com.br', tags: 'teste'},
-    {id: 2,title: 'Teste 2', link: 'http://www.teste.com.br', tags: 'teste2'},
-    {id: 3,title: 'Teste 3', link: 'http://www.teste.com.br', tags: 'teste3'}
-  ];
 
 class ContentBody extends Component {
     constructor(props){
         super(props)
         this.state = {
-            value: props.initialValue
+            bookmarksArg: [],
+            bookmarksArgFilter: []
         }
     }
 
+    handleAddBookmarks = e => {
+        this.setState({
+            bookmarksArg:[...this.state.bookmarksArg, e],
+        })
+    }
+    handleRemoveBookmarks = id => {
+        let newArr = this.state.bookmarksArg.splice(id,1)
+        this.setState({
+            bookmarks: newArr,
+        })
+    }
+    handleRemoveTag = id => {
+        let tagPosition = id.split(' ')
+        let valueTag = this.state.bookmarksArg[tagPosition[0]].tags[tagPosition[1]]
+
+        let myArray = this.state.bookmarksArg[tagPosition[0]].tags
+        let index = myArray.indexOf(valueTag);
+
+        if (index !== -1) myArray.splice(index, 1)
+
+        // TODO 
+        // Create second Array and setState in bookmarks array
+        this.setState({
+        })
+    }
+    handleChangeFilter = e => {
+        const textInputField = {
+            tags: [e]
+        };
+        const auxBookmarks = this.state.bookmarksArg.filter(bookmarks => bookmarks.tags.find(bookmarks => textInputField.tags.includes(bookmarks)));
+        this.setState({
+            bookmarksArgFilter: auxBookmarks
+        })
+        
+    }
     render() {
       return (
         <Container>
             <Row>
                 <Col>
                     <div className="body-app">
-                        <Menu initialValue={1} />
-                        <List bookmarks={bookmarksArg} />
+                        <Menu filterBookmarks={this.handleChangeFilter} addBookmarks={this.handleAddBookmarks} initialValue={1} />
+                        <List removeBookmarks={this.handleRemoveBookmarks} removeTag={this.handleRemoveTag} bookmarks={this.state.bookmarksArgFilter.length !== 0 ? this.state.bookmarksArgFilter : this.state.bookmarksArg} />
                     </div>
                 </Col>
             </Row>

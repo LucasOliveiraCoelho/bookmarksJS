@@ -1,16 +1,26 @@
 import React from 'react';
 import './List.css';
+import {Col, Row,} from 'reactstrap'
 
 function List(props){
-  const bookmarksList = props.bookmarks.map((bookmarks) =>
-    <div className='singleBookmarks' key={bookmarks.id}>
-      <h3>{bookmarks.title}</h3>
-      <p>
-        <a href={bookmarks.link} target="_blank" rel="noopener noreferrer">{bookmarks.link}</a>
-      </p>
-      <ul className='Tags'>
-        <li>{bookmarks.tags} <span className='remove-icon' onClick={() => (console.log('Excluir'))}></span></li>
-      </ul>
+  const bookmarksList = props.bookmarks.map((bookmarks,i) =>   
+  <div className='singleBookmarks' key={i} id={i}>
+    <Row>
+      <Col xs='10'>
+          <h3>{bookmarks.title}</h3>
+          <p>
+            <a href={bookmarks.link} target="_blank" rel="noopener noreferrer">{bookmarks.link}</a>
+          </p>
+          <ul className='Tags'>
+            {
+              bookmarks.tags.map((val, index) => <li data={val} indextag={[index]} key={index}>{val}<span className='remove-icon' onClick={() => props.removeTag(i + ' ' + index) } ></span></li> )
+            }
+          </ul>
+      </Col>
+      <Col xs='2' id='deleteColumn'>
+        <p className="deleteBookmarks" id={bookmarks.id} onClick={() => props.removeBookmarks(i)}><img src={require('./static/images/Trash.svg')} alt='Add' />DELETE</p>
+      </Col>
+    </Row>
     </div>
   );
   return (
@@ -19,5 +29,5 @@ function List(props){
     </div>
   );
 }
-  
+
 export default List;
