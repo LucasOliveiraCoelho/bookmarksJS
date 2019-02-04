@@ -12,4 +12,6 @@ Desenvolvimento do front-end de uma aplicação para gerenciamento de favoritos.
 ## Instalação
 1. Clone o repositorio;
 2. Execute o comando
-<blockquote> npm i
+```
+npm i
+```
