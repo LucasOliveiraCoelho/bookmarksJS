@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Container } from 'reactstrap';
 import './Header.css';
+import Logo from './static/images/LogoBeblue.png'
 
 class Header extends Component {
     render() {
@@ -9,7 +10,7 @@ class Header extends Component {
             <Row>
                 <Col>
                     <div className="Header">
-                        <img src={require('./static/images/LogoBeblue.png')} alt='Logo' />
+                        <img src={Logo} alt='Logo' />
                         <h1>Front-End Test</h1>
                     </div>
                 </Col>
