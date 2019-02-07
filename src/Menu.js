@@ -1,5 +1,9 @@
 import React, {Component} from 'react'
 import './Menu.css'
+import SearchGray from './static/images/SearchGray.svg'
+import Add from './static/images/Add.svg'
+import AddGray from './static/images/AddGray.svg'
+import Search from './static/images/Search.svg'
 
 class Menu extends Component {
     constructor(props){
@@ -73,8 +77,8 @@ class Menu extends Component {
         if(this.state.value === initialMenuValue){
             return(
                 <div role='form' className='Menu' id='Add'>
-                    <img id='search' onClick={() => this.handleAlterMenu(-1)} src={require('./static/images/SearchGray.svg')} alt='Search' />
-                    <img id='add' src={require('./static/images/Add.svg')} alt='Add' />
+                    <img id='search' onClick={() => this.handleAlterMenu(-1)} src={SearchGray} alt='Search' />
+                    <img id='add' src={Add} alt='Add' />
                     
                     <form onSubmit={this.handleSubmit}>
                         <input name='title' type='text' value={this.state.title} onChange={this.handleChange} placeholder='Title'/>
@@ -87,8 +91,8 @@ class Menu extends Component {
         } else {
             return(
                 <div className='Menu' id='Search'>
-                    <img id='add' onClick={() => this.handleAlterMenu(1)} src={require('./static/images/AddGray.svg')} alt='Add' />
-                    <img id='search' src={require('./static/images/Search.svg')} alt='Search' />
+                    <img id='add' onClick={() => this.handleAlterMenu(1)} src={AddGray} alt='Add' />
+                    <img id='search' src={Search} alt='Search' />
                     <form>
                         <input name='filterTag' type='text' value={this.state.filterTag} onChange={this.handleChangeFilter} placeholder='Filter by tag'/>
                         <input type='submit' style={{ display: 'none' }} />
