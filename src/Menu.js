@@ -18,6 +18,7 @@ class Menu extends Component {
     }
 
     handleSubmit = e => {
+        e.preventDefault()
         // Create array for split string
         let tagsArg = this.state.tags.split(' ')
 
@@ -45,7 +46,6 @@ class Menu extends Component {
             });
             this.props.addBookmarks(Bookmarksobj);
         }
-        e.preventDefault()
     }
 
     handleChange = e => {
@@ -69,7 +69,8 @@ class Menu extends Component {
     }
 
     render(){
-        if(this.state.value === 1){
+        const initialMenuValue = 1
+        if(this.state.value === initialMenuValue){
             return(
                 <div role='form' className='Menu' id='Add'>
                     <img id='search' onClick={() => this.handleAlterMenu(-1)} src={require('./static/images/SearchGray.svg')} alt='Search' />
@@ -83,7 +84,7 @@ class Menu extends Component {
                     </form>
                 </div>
             );
-        }else{
+        } else {
             return(
                 <div className='Menu' id='Search'>
                     <img id='add' onClick={() => this.handleAlterMenu(1)} src={require('./static/images/AddGray.svg')} alt='Add' />
