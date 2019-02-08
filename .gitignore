@@ -12,7 +12,7 @@
 /build
 
 # CSS Temporary
-/static/css/*.css
+*.css
 
 # misc
 .DS_Store
