@@ -23,12 +23,14 @@ class Menu extends Component {
 
     handleSubmit = e => {
         e.preventDefault()
-        // Create array for split string
-        let tagsArg = this.state.tags.split(' ')
+        // Create array for split string and remove value != string, example space. 
+        let tagsArg = (this.state.tags.split(' ')).filter(String)
 
         let tagsArgUpper = tagsArg.map(function(textTag) {
             return textTag.toUpperCase();
         })
+
+        let allTags = [ ...new Set(tagsArgUpper) ]
 
         //Validation empty value
         if(this.state.title === '' || this.state.link === '' || this.state.tags === '' ){
@@ -40,7 +42,7 @@ class Menu extends Component {
             let Bookmarksobj = {
                 title: this.state.title,
                 link: linkHttp,
-                tags: tagsArgUpper
+                tags: allTags
             }
             //Clear state form
             this.setState({
@@ -71,6 +73,9 @@ class Menu extends Component {
         })
         this.props.filterBookmarks(value)
     }
+    handleSearchSubmit = e => {
+        e.preventDefault()
+    }
 
     render(){
         const initialMenuValue = 1
@@ -93,7 +98,7 @@ class Menu extends Component {
                 <div className='Menu' id='Search'>
                     <img id='add' onClick={() => this.handleAlterMenu(1)} src={AddGray} alt='Add' />
                     <img id='search' src={Search} alt='Search' />
-                    <form>
+                    <form onSubmit={this.handleSearchSubmit}>
                         <input name='filterTag' type='text' value={this.state.filterTag} onChange={this.handleChangeFilter} placeholder='Filter by tag'/>
                         <input type='submit' style={{ display: 'none' }} />
                     </form>
