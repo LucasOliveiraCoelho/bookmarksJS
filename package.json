@@ -15,6 +15,7 @@
     "build-css": "stylus -c src/static/stylus/ --out src/static/css/",
     "watch-css": "yarn run build-css && stylus -c -w src/static/stylus --out src/static/css/",
     "start-js": "react-scripts start",
+    "prestart": "npm run build-css",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js"
