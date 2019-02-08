@@ -13,11 +13,11 @@ class Menu extends Component {
             title:'',
             link:'',
             tags:'',
-            filterTag:''
+            filterTag: ''
         }
     }
     
-    handleAlterMenu(e){
+    handleAlterMenu = e => {
         this.setState({ value: this.state.value + e })
     }
 
@@ -32,13 +32,21 @@ class Menu extends Component {
 
         let allTags = [ ...new Set(tagsArgUpper) ]
 
-        //Validation empty value
+        let linkHttp = this.state.link
+
+        // Add http in url
+        // TO DO - Validate if have https//
+        if (!this.state.link.match('^http://')){
+            linkHttp = 'http://' + this.state.link
+        }
+
+        // Validation empty value
         if(this.state.title === '' || this.state.link === '' || this.state.tags === '' ){
             alert('Por favor preencha todos os campos')
         }
+
         else{
-            //title: 'Teste 1', link: 'http://www.teste.com.br', tags: ['teste2','testando2','testado2','testadoxxxx2']
-            let linkHttp = 'http://' + this.state.link
+            // title: 'Teste 1', link: 'http://www.teste.com.br', tags: ['teste2','testando2','testado2','testadoxxxx2']
             let Bookmarksobj = {
                 title: this.state.title,
                 link: linkHttp,

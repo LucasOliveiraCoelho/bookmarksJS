@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import { Row, Col, Container } from 'reactstrap'
 import Menu from './Menu'
 import List from './List'
