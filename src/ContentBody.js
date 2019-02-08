@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Row, Col, Container } from 'reactstrap'
 import Menu from './Menu'
 import List from './List'
-import './ContentBody.css'
+import './static/css/ContentBody.css'
 
 class ContentBody extends Component {
     constructor(props){

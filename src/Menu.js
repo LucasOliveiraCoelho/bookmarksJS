@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import './Menu.css'
+import './static/css/Menu.css'
 import SearchGray from './static/images/SearchGray.svg'
 import Add from './static/images/Add.svg'
 import AddGray from './static/images/AddGray.svg'

@@ -1,5 +1,5 @@
 import React from 'react';
-import './List.css';
+import './static/css/List.css';
 import {Col, Row,} from 'reactstrap'
 
 function List(props){

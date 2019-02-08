@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Container } from 'reactstrap';
-import './Header.css';
+import './static/css/Header.css';
 import Logo from './static/images/LogoBeblue.png'
 
 class Header extends Component {
