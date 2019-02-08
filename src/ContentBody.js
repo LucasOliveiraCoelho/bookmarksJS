@@ -18,14 +18,14 @@ class ContentBody extends Component {
             bookmarksArg:[...this.state.bookmarksArg, e],
         })
     }
-    handleRemoveBookmarks = id => {
-        let newArr = this.state.bookmarksArg.splice(id,1)
+    handleRemoveBookmarks = e => {
+        let newArr = this.state.bookmarksArg.splice(e,1)
         this.setState({
             bookmarks: newArr,
         })
     }
-    handleRemoveTag = id => {
-        let tagPosition = id.split(' ')
+    handleRemoveTag = e => {
+        let tagPosition = e.split(' ')
         let valueTag = this.state.bookmarksArg[tagPosition[0]].tags[tagPosition[1]]
 
         let myArray = this.state.bookmarksArg[tagPosition[0]].tags
@@ -42,11 +42,14 @@ class ContentBody extends Component {
         const textInputField = {
             tags: [e]
         };
-        const auxBookmarks = this.state.bookmarksArg.filter(bookmarks => bookmarks.tags.find(bookmarks => textInputField.tags.includes(bookmarks)));
+        const aux = this.state.bookmarksArg.filter(
+            bookmarks => bookmarks.tags.find(
+                tags => tags.includes(textInputField.tags)
+            )
+        );
         this.setState({
-            bookmarksArgFilter: auxBookmarks
+            bookmarksArgFilter: aux
         })
-        
     }
     render() {
       return (
