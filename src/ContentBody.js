@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import _ from 'lodash'
 import { Row, Col, Container } from 'reactstrap'
 import Menu from './Menu'
 import List from './List'
@@ -11,6 +12,7 @@ class ContentBody extends Component {
             bookmarksArg: [],
             bookmarksArgFilter: []
         }
+        this.updateChangeFilterupdateUrl = _.debounce(this.updateChangeFilter, 500)
     }
 
     handleAddBookmarks = e => {
@@ -25,25 +27,17 @@ class ContentBody extends Component {
             bookmarks: newArr,
         })
     }
-    handleRemoveTag = e => {
-        let tagPosition = e.split(' ')
-        let valueTag = this.state.bookmarksArg[tagPosition[0]].tags[tagPosition[1]]
+    handleRemoveTag = (indexBookmarks,indexTag) => {
+        
+        let newArray = this.state.bookmarksArg.map((val, index) =>
+            index === indexBookmarks ? {...val, tags: val.tags.filter((tag,i) =>
+                i !== indexTag
+            )} : val
+        )
+        console.log(newArray)
 
-        let myArray = this.state.bookmarksArg[tagPosition[0]].tags
-        let index = myArray.indexOf(valueTag)
-        if (index !== -1) myArray.splice(index, 1)
-
-        // console.log(this.state.bookmarksArg[tagPosition[0]])
-
-        /* TEST CREATE NEW ARRAY
-        let arrayRemoveItem = this.state.bookmarksArg.splice(tagPosition[0],1)
-        let fullArray = arrayRemoveItem + myArray
-        console.log(myArray)
-        */
-
-        // TODO 
-        // Create second Array and setState in bookmarks array
         this.setState({
+            bookmarksArg: newArray
         })
     }
     handleChangeFilter = e => {
@@ -58,8 +52,11 @@ class ContentBody extends Component {
         if(aux.length === 0){
             aux = [{title:'', link:'', tags:[]}]
         }
+        this.updateChangeFilter(aux)
+    }
+    updateChangeFilter = e => {
         this.setState({
-            bookmarksArgFilter: aux
+            bookmarksArgFilter: e
         })
     }
     render() {

@@ -114,6 +114,5 @@ class Menu extends Component {
         }
     }
 }
-// <Throttle time="200" handler="onChange"></Throttle>
 
 export default Menu

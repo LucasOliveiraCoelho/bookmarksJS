@@ -26,7 +26,7 @@ function List(props){
 							bookmarks.tags.map((val, index) => 
 								<li data={val} indextag={[index]} key={index}>
 									{val}
-									<span className='remove-icon' onClick={() => props.removeTag(i + ' ' + index) } >
+									<span className='remove-icon' onClick={() => props.removeTag(i,index) } >
 									</span>
 								</li> 
 							)
