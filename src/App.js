@@ -5,7 +5,7 @@ import ContentBody from './ContentBody';
 
 function App(){
   return (
-    <div className="App">
+    <div className='App'>
       <Header />
       <ContentBody />
     </div>

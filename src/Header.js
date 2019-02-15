@@ -8,7 +8,7 @@ function Header(){
     <Container>
         <Row>
             <Col>
-                <div className="Header">
+                <div className='Header'>
                     <img src={Logo} alt='Logo' />
                     <h1>Front-End Test</h1>
                 </div>
