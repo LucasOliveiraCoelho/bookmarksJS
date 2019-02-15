@@ -72,9 +72,6 @@ class Menu extends Component {
         });
     }
 
-    // TODO
-    // Criar outro array para salvar o estado anterior antes do filtro, e passar o valor dos campos que
-    // passam pela condição no novo array, caso nenhuma
     handleChangeFilter = e => {
         const value = e.target.value.toUpperCase()
         this.setState({

@@ -22,9 +22,12 @@ class ContentBody extends Component {
         })
     }
     handleRemoveBookmarks = e => {
-        let newArr = this.state.bookmarksArg.splice(e,1)
+        let newArr = this.state.bookmarksArg.filter((bookmarks,i) =>
+            i !== e
+        )
+        
         this.setState({
-            bookmarks: newArr,
+            bookmarksArg: newArr,
         })
     }
     handleRemoveTag = (indexBookmarks,indexTag) => {
@@ -34,7 +37,6 @@ class ContentBody extends Component {
                 i !== indexTag
             )} : val
         )
-        console.log(newArray)
 
         this.setState({
             bookmarksArg: newArray
