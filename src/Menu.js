@@ -3,11 +3,24 @@ import Add from './AddMenu.js'
 import Search from './SearchMenu.js'
 import './static/css/Menu.css'
 
+/* Images Search menu */
+import addGray from './static/images/AddGray.svg'
+import search from './static/images/Search.svg'
+
+/* Images Add menu */
+import searchGray from './static/images/SearchGray.svg'
+import add from './static/images/Add.svg'
+
+export const FORMS = {
+    ADD: 1,
+    FILTER: 0
+}
+
 class Menu extends Component {
     constructor(props){
         super(props)
         this.state = {
-            value: props.initialValue,
+            selectedMenu: FORMS.ADD,
             title:'',
             link:'',
             tags:'',
@@ -15,9 +28,9 @@ class Menu extends Component {
         }
     }
     
-    handleAlterMenu = e => {
+    handleAlterMenu = selectedMenu => {
         this.setState({
-            value: this.state.value + e,
+            selectedMenu,
             title:'',
             link:'',
             tags:'',
@@ -85,26 +98,32 @@ class Menu extends Component {
     }
 
     render(){
-        const initialMenuValue = 1
-        if(this.state.value === initialMenuValue){
+
+        if (this.state.selectedMenu === FORMS.ADD){
             return(
                 <div role='form' className='Menu Add'>
-                    <Add alterMenu={this.handleAlterMenu}
-                            onChangeInput={this.handleChange}
-                            submit={this.handleSubmit}
-                            title={this.state.title}
-                            link={this.state.link}
-                            tags={this.state.tags}
+                    <img onClick={() => this.handleAlterMenu(FORMS.FILTER)} src={searchGray} alt='Search' />
+                    <img src={add} alt='Add' />
+                    
+                    <Add 
+                        onChangeInput = {this.handleChange}
+                        submit = {this.handleSubmit}
+                        title = {this.state.title}
+                        link = {this.state.link}
+                        tags = {this.state.tags}
                     />
                 </div>
             );
         } else {
             return(
                 <div role='form' className='Menu Search'>
-                    <Search alterMenu={this.handleAlterMenu} 
-                            submit={this.handleSearchSubmit}
-                            value={this.state.filterTag}
-                            filterTag={this.handleChangeFilter}
+                    <img onClick={() => this.handleAlterMenu(FORMS.ADD)} src={addGray} alt='Add' />
+                    <img src={search} alt='Search' />
+
+                    <Search
+                        submit = {this.handleSearchSubmit}
+                        value = {this.state.filterTag}
+                        filterTag = {this.handleChangeFilter}
                     />
                 </div>
             )

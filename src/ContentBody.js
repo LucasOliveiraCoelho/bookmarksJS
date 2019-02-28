@@ -12,7 +12,7 @@ class ContentBody extends Component {
             bookmarksArg: [],
             bookmarksArgFilter: []
         }
-        this.updateChangeFilterupdateUrl = _.debounce(this.updateChangeFilter, 500)
+        this.handleChangeFilterDebounce = _.debounce(this.handleChangeFilter, 300)
     }
 
     handleAddBookmarks = e => {
@@ -46,19 +46,17 @@ class ContentBody extends Component {
         const textInputField = {
             tags: [e]
         };
-        let aux = this.state.bookmarksArg.filter(
+        let bookmarksFilter = this.state.bookmarksArg.filter(
             bookmarks => bookmarks.tags.find(
                 tags => tags.includes(textInputField.tags)
             )
         );
-        if(aux.length === 0){
-            aux = [{title:'', link:'', tags:[]}]
+
+        if(bookmarksFilter.length === 0){
+            bookmarksFilter = []
         }
-        this.updateChangeFilter(aux)
-    }
-    updateChangeFilter = e => {
         this.setState({
-            bookmarksArgFilter: e
+            bookmarksArgFilter: bookmarksFilter
         })
     }
     render() {
@@ -67,9 +65,15 @@ class ContentBody extends Component {
             <Row>
                 <Col>
                     <div className='body-app'>
-                        <Menu filterBookmarks={this.handleChangeFilter} addBookmarks={this.handleAddBookmarks} initialValue={1} />
-                        <List removeBookmarks={this.handleRemoveBookmarks} removeTag={this.handleRemoveTag} 
-                            bookmarks={this.state.bookmarksArgFilter.length === 0 ? this.state.bookmarksArg : this.state.bookmarksArgFilter} />
+                        <Menu 
+                            filterBookmarks={this.handleChangeFilterDebounce} 
+                            addBookmarks={this.handleAddBookmarks}
+                            />
+                        <List 
+                            removeBookmarks={this.handleRemoveBookmarks}
+                            removeTag={this.handleRemoveTag} 
+                            bookmarks={this.state.bookmarksArgFilter.length === 0 ? this.state.bookmarksArg : this.state.bookmarksArgFilter}
+                        />
                     </div>
                 </Col>
             </Row>

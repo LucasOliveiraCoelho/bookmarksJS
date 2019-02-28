@@ -5,13 +5,6 @@ import Trash from './static/images/Trash.svg'
 
 function List(props){
 	const bookmarksList = props.bookmarks.map((bookmarks,i) =>
-		(bookmarks.title === '' && bookmarks.link === '') ?
-		(
-			<div className='notFound' key={i}>
-				Not found.
-			</div>
-		) :
-		(
 		<div className='singleBookmarks' key={i} id={i}>
 			<Row>
 				<Col xs='10'>
@@ -41,15 +34,12 @@ function List(props){
 				</Col>
 			</Row>
 		</div>
-		)
-
-		
-  )
-  return (
-    <div className='Bookmarks'>
-      {bookmarksList}
-    </div>
-  );
+	)
+	return (
+		<div className='Bookmarks'>
+			{bookmarksList}
+		</div>
+	);
 }
 
 export default List;
