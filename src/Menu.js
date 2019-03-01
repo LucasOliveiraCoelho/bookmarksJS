@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Add from './AddMenu.js'
 import Search from './SearchMenu.js'
 import './static/css/Menu.css'
+import { FORMS } from './ContentBody'
 
 /* Images Search menu */
 import addGray from './static/images/AddGray.svg'
@@ -11,16 +12,11 @@ import search from './static/images/Search.svg'
 import searchGray from './static/images/SearchGray.svg'
 import add from './static/images/Add.svg'
 
-export const FORMS = {
-    ADD: 1,
-    FILTER: 0
-}
 
 class Menu extends Component {
     constructor(props){
         super(props)
         this.state = {
-            selectedMenu: FORMS.ADD,
             title:'',
             link:'',
             tags:'',
@@ -30,17 +26,17 @@ class Menu extends Component {
     
     handleAlterMenu = selectedMenu => {
         this.setState({
-            selectedMenu,
             title:'',
             link:'',
             tags:'',
             filterTag:''
         })
-        this.props.filterBookmarks()
+        this.props.alterMenu(selectedMenu)
     }
 
     handleSubmit = e => {
         e.preventDefault()
+
         // Create array for split string and remove value != string, example space. 
         let tagsArg = (this.state.tags.split(' ')).filter(String)
         let tagsArgUpper = tagsArg.map(function(textTag) {
@@ -98,13 +94,12 @@ class Menu extends Component {
     }
 
     render(){
-
-        if (this.state.selectedMenu === FORMS.ADD){
+        if (this.props.selectedMenu === FORMS.ADD){
             return(
                 <div role='form' className='Menu Add'>
                     <img onClick={() => this.handleAlterMenu(FORMS.FILTER)} src={searchGray} alt='Search' />
                     <img src={add} alt='Add' />
-                    
+
                     <Add 
                         onChangeInput = {this.handleChange}
                         submit = {this.handleSubmit}

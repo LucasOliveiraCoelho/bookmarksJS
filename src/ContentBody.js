@@ -5,10 +5,16 @@ import Menu from './Menu'
 import List from './List'
 import './static/css/ContentBody.css'
 
+export const FORMS = {
+    ADD: 1,
+    FILTER: 0
+}
+
 class ContentBody extends Component {
     constructor(props){
         super(props)
         this.state = {
+            selectedMenu: FORMS.ADD,
             bookmarksArg: [],
             bookmarksArgFilter: []
         }
@@ -17,8 +23,7 @@ class ContentBody extends Component {
 
     handleAddBookmarks = e => {
         this.setState({
-            bookmarksArg:[...this.state.bookmarksArg, e],
-            bookmarksArgFilter:[]
+            bookmarksArg:[...this.state.bookmarksArg, e]
         })
     }
     handleRemoveBookmarks = e => {
@@ -46,19 +51,37 @@ class ContentBody extends Component {
         const textInputField = {
             tags: [e]
         };
-        let bookmarksFilter = this.state.bookmarksArg.filter(
-            bookmarks => bookmarks.tags.find(
-                tags => tags.includes(textInputField.tags)
-            )
-        );
 
-        if(bookmarksFilter.length === 0){
-            bookmarksFilter = []
-        }
-        this.setState({
-            bookmarksArgFilter: bookmarksFilter
+        this.setState((state) => {
+            let bookmarksFilter = state.bookmarksArg.filter(
+                bookmarks => bookmarks.tags.find(
+                    tags => tags.includes(textInputField.tags)
+                )
+            );
+
+            if(bookmarksFilter.length === 0){
+                bookmarksFilter = []
+            }
+            
+            return {
+                bookmarksArgFilter: bookmarksFilter
+            }
         })
     }
+    handleAlterMenu = selectedMenu => {
+        this.setState({
+            selectedMenu: selectedMenu
+        })
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if(prevState.selectedMenu === FORMS.ADD && this.state.selectedMenu === FORMS.FILTER){
+            this.setState((state) => ({
+                bookmarksArgFilter: state.bookmarksArg
+            }))            
+        }
+    }
+
     render() {
       return (
         <Container>
@@ -68,11 +91,13 @@ class ContentBody extends Component {
                         <Menu 
                             filterBookmarks={this.handleChangeFilterDebounce} 
                             addBookmarks={this.handleAddBookmarks}
-                            />
+                            alterMenu={this.handleAlterMenu}
+                            selectedMenu={this.state.selectedMenu}
+                        />
                         <List 
                             removeBookmarks={this.handleRemoveBookmarks}
                             removeTag={this.handleRemoveTag} 
-                            bookmarks={this.state.bookmarksArgFilter.length === 0 ? this.state.bookmarksArg : this.state.bookmarksArgFilter}
+                            bookmarks={this.state.selectedMenu === FORMS.ADD ? this.state.bookmarksArg : this.state.bookmarksArgFilter}
                         />
                     </div>
                 </Col>
