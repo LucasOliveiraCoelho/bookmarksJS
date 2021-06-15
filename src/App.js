@@ -1,11 +1,11 @@
-import React from 'react';
-import './static/css/App.css';
-import Header from './Header';
-import ContentBody from './ContentBody';
+import React from "react";
+import "./static/css/App.css";
+import Header from "./Header";
+import ContentBody from "./ContentBody";
 
-function App(){
+function App() {
   return (
-    <div className='App'>
+    <div className="App">
       <Header />
       <ContentBody />
     </div>
